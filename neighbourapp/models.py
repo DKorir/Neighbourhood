@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime, date
 
+from django.urls import reverse
+
 class Neighbourhood(models.Model):
     name = models.CharField(max_length=50)
     location = models.CharField(max_length=60)
@@ -11,7 +13,6 @@ class Neighbourhood(models.Model):
     police_info = models.IntegerField(null=True, blank=True)
     police_officer = models.CharField(max_length=60, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="neighbourhood")
-    photo = models.ImageField(upload_to='images')
     
 
     def __str__(self):
@@ -31,11 +32,12 @@ class Neighbourhood(models.Model):
 class Business(models.Model):
     name = models.CharField(max_length=120)
     email = models.EmailField(max_length=254)
-    description = models.TextField(blank=True)
     neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, related_name='business')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner")
     def __str__(self):
         return f'{self.name} Business'
+    def get_absolute_url(self):
+        return reverse('home')
 
     def create_business(self):
         self.save()
@@ -58,6 +60,10 @@ class Profile(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=120, null=True)
     post = models.TextField()
+    photo = models.ImageField(upload_to='images')
+
     date = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='post_owner')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_owner')
     hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, related_name='hood_post')
+    def get_absolute_url(self):
+        return reverse('home')

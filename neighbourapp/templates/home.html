@@ -8,13 +8,13 @@
         <div class="col-md-8">
             {% for x in object_list %}
             <h1>posted By: {{ x.user }}</h1>  <br>
-            {% if x.photo %}
+            {% if x.title %}
             <a href="{% url 'details' x.pk %}"><img src="{{ x.photo.url }}" alt="" width="280px"><br></a>
             {% else %}
                 <h4 class="text-muted">No Image</h4>
             {%endif%}
         
-            <h3>Neighbourhood Name: <a href=" {% url 'details' x.pk %} ">{{ x.name }}</a>  </h3><br>
+            <h3>Neighbourhood Name: <a href=" {% url 'details' x.pk %} ">{{ x.hood }}</a>  </h3><br>
             {{ x.description }} <br>
             <h6>Location:{{ x.location }} </h6> <br>
         </div>

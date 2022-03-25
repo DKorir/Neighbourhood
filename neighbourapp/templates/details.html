@@ -5,12 +5,13 @@
 {% block content %}
     <div class="card">
         <div class="card-header">
-            <h6> {{ neighbourhood.user.first_name }} {{ neighbourhood.user.last_name }}</h6>
+            <h6> {{ post.user.first_name }} {{ post.user.last_name }}</h6>
         </div>
-        <img src="{{ neighbourhood.photo.url }}" class="card-img-top" alt=" {{ neighbourhood.name }} ">
+        <img src="{{ post.photo.url }}" class="card-img-top" alt=" {{ post.post }} ">
         <div class="card-body">
-        <h5 class="card-title"> Neighbourhood Name: {{ neighbourhood.name }} </h5>
-        <p class="card-text"> {{ neighbourhood.description }} </p>
+        <h5 class="card-title"> Neighbourhood Name: {{ post.name }} </h5>
+        <p class="card-text"> {{ post.hood }} </p>
+        <p class="card-text"> {{ post.date }} </p>
         <a href=" {% url 'home' %} " class="btn btn-primary">Back</a>
         </div>
     </div>
