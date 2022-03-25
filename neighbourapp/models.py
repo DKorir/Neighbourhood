@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime, date
+
 class Neighbourhood(models.Model):
     name = models.CharField(max_length=50)
     location = models.CharField(max_length=60)
@@ -10,6 +12,7 @@ class Neighbourhood(models.Model):
     police_officer = models.CharField(max_length=60, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="neighbourhood")
     photo = models.ImageField(upload_to='images')
+    
 
     def __str__(self):
         return self.name
@@ -51,3 +54,10 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     def __str__(self):
         return f'{self.user.username} Profile'
+
+class Post(models.Model):
+    title = models.CharField(max_length=120, null=True)
+    post = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='post_owner')
+    hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, related_name='hood_post')

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}
+    Details
+{% endblock %}
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            <h6> {{ neighbourhood.user.first_name }} {{ neighbourhood.user.last_name }}</h6>
+        </div>
+        <img src="{{ neighbourhood.photo.url }}" class="card-img-top" alt=" {{ neighbourhood.name }} ">
+        <div class="card-body">
+        <h5 class="card-title"> Neighbourhood Name: {{ neighbourhood.name }} </h5>
+        <p class="card-text"> {{ neighbourhood.description }} </p>
+        <a href=" {% url 'home' %} " class="btn btn-primary">Back</a>
+        </div>
+    </div>
+{% endblock%}
+
+
