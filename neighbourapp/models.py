@@ -9,6 +9,7 @@ class Neighbourhood(models.Model):
     police_info = models.IntegerField(null=True, blank=True)
     police_officer = models.CharField(max_length=60, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="neighbourhood")
+    photo = models.ImageField(upload_to='images')
 
     def __str__(self):
         return self.name
