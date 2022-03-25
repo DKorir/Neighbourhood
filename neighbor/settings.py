@@ -38,8 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'neighborapp',
-    'account',
+    'neighbourapp',
 ]
 
 MIDDLEWARE = [
@@ -79,7 +78,7 @@ WSGI_APPLICATION = 'neighbor.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'neighbour',
+        'NAME': 'neigh',
         'USER': 'moringa',
     'PASSWORD':'0723120546',
     }
