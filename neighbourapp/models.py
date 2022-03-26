@@ -29,25 +29,6 @@ class Neighbourhood(models.Model):
         return cls.objects.filter(id=neighborhood_id)
 
 
-class Business(models.Model):
-    name = models.CharField(max_length=120)
-    email = models.EmailField(max_length=254)
-    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, related_name='business')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner")
-    def __str__(self):
-        return f'{self.name} Business'
-    def get_absolute_url(self):
-        return reverse('home')
-
-    def create_business(self):
-        self.save()
-
-    def delete_business(self):
-        self.delete()
-
-    @classmethod
-    def search_business(cls, name):
-        return cls.objects.filter(name__icontains=name).all()
 
 class Profile(models.Model):
     profile_pic = models.ImageField(upload_to='images/', default='default.png')
@@ -65,5 +46,9 @@ class Post(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_owner')
     hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, related_name='hood_post')
+    def __str__(self):
+        return self.title
     def get_absolute_url(self):
         return reverse('home')
+
+        
